@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QDBusConnection>
 #include <QDBusInterface>
-#include <QDebug>
 
 class Fonts : public QObject
 {
