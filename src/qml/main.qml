@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.12
 import QMLTermWidget 1.0
 import MeuiKit 1.0 as Meui
-import Cyber.Terminal 1.0
+import org.cyber.Terminal 1.0
 
 ApplicationWindow {
     width: 640
@@ -39,6 +39,7 @@ ApplicationWindow {
         font.family: fonts.fixedFont
         font.pointSize: 9
         colorScheme: "Linux"
+        
         layer.enabled: true
         layer.effect: OpacityMask {
             maskSource: Rectangle {
@@ -48,8 +49,9 @@ ApplicationWindow {
             }
         }
 
-        session: QMLTermSession{
+        session: QMLTermSession {
             id: session
+            onFinished: Qt.callLater(Qt.quit)
         }
 
         Component.onCompleted: {
@@ -59,7 +61,7 @@ ApplicationWindow {
 
         QMLTermScrollbar {
             terminal: terminal
-            width: 20
+            width: 10
             Rectangle {
                 opacity: 0.4
                 anchors.margins: 5

@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty(QStringLiteral("debug"), false);
     #endif
 
-    const char *uri = "Cyber.Terminal";
+    const char *uri = "org.cyber.Terminal";
     qmlRegisterType<Fonts>(uri, 1, 0, "Fonts");
 
     engine.addImportPath(QStringLiteral("qrc:/"));

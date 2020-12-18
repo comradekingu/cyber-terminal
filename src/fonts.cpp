@@ -1,17 +1,19 @@
 #include "fonts.h"
-#include <QFontDatabase>
 
 Fonts::Fonts(QObject *parent) : QObject(parent)
 {
-
 }
 
-QString Fonts::genernalFont() const
+QString Fonts::fixedFont()
 {
-    return QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
-}
-
-QString Fonts::fixedFont() const
-{
-    return QFontDatabase::systemFont(QFontDatabase::FixedFont).family();
+    QDBusInterface iface("org.cyber.Settings",
+                         "/Theme",
+                         "org.cyber.Theme",
+                         QDBusConnection::sessionBus(), this);
+    if (iface.isValid()) {
+        qDebug() << "interface valid woohoo";
+        return iface.property("systemFixedFont").toString();
+    }
+    qDebug() << "interface not valid what the fuck";
+    return "Monospace";
 }
