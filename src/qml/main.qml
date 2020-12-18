@@ -32,6 +32,11 @@ ApplicationWindow {
         onTriggered: terminal.pasteClipboard();
         shortcut: "Ctrl+Shift+V"
     }
+    
+    Action {
+        onTriggered: Qt.quit();
+        shortcut: "Ctrl+Shift+Q"
+    }
 
     QMLTermWidget {
         id: terminal
