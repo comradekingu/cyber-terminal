@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.12
 import QMLTermWidget 1.0
 import MeuiKit 1.0 as Meui
+import Cyber.Terminal 1.0
 
 ApplicationWindow {
     width: 640
@@ -16,6 +17,10 @@ ApplicationWindow {
 
     background: Rectangle {
         color: Meui.Theme.backgroundColor
+    }
+
+    Fonts {
+        id: fonts
     }
 
     Action {
@@ -31,7 +36,7 @@ ApplicationWindow {
     QMLTermWidget {
         id: terminal
         anchors.fill: parent
-        font.family: "JetBrains Mono"
+        font.family: fonts.fixedFont
         font.pointSize: 9
         colorScheme: "Linux"
         layer.enabled: true

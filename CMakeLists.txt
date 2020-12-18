@@ -16,6 +16,7 @@ find_package(MeuiKit REQUIRED)
 
 set(SRCS
     src/main.cpp
+    src/fonts.cpp
 )
 
 set(RESOURCES

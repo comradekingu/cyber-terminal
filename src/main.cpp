@@ -21,6 +21,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include "fonts.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -33,6 +35,9 @@ int main(int argc, char *argv[])
     #else
         engine.rootContext()->setContextProperty(QStringLiteral("debug"), false);
     #endif
+
+    const char *uri = "Cyber.Terminal";
+    qmlRegisterType<Fonts>(uri, 1, 0, "Fonts");
 
     engine.addImportPath(QStringLiteral("qrc:/"));
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
