@@ -69,7 +69,7 @@ ApplicationWindow {
             width: 10
             Rectangle {
                 opacity: 0.4
-                anchors.margins: 5
+                anchors.margins: 2
                 radius: width * 0.5
                 anchors.fill: parent
             }
