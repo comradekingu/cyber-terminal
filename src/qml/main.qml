@@ -13,7 +13,8 @@ ApplicationWindow {
     minimumHeight: 200
     visible: true
     id: rootWindow
-    title: qsTr("Terminal")
+    //title: qsTr("Terminal")
+    title: session.title + qsTr(" - Terminal")
 
     background: Rectangle {
         color: Meui.Theme.backgroundColor
@@ -24,17 +25,17 @@ ApplicationWindow {
     }
 
     Action {
-        onTriggered: terminal.copyClipboard();
+        onTriggered: terminal.copyClipboard()
         shortcut: "Ctrl+Shift+C"
     }
 
     Action {
-        onTriggered: terminal.pasteClipboard();
+        onTriggered: terminal.pasteClipboard()
         shortcut: "Ctrl+Shift+V"
     }
     
     Action {
-        onTriggered: Qt.quit();
+        onTriggered: Qt.quit()
         shortcut: "Ctrl+Shift+Q"
     }
 
