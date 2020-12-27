@@ -39,6 +39,7 @@ Meui.Window {
         anchors.fill: parent
         anchors.margins: Meui.Units.smallSpacing
         anchors.rightMargin: 1
+        anchors.topMargin: 0
         color: "transparent"
         QMLTermWidget {
             id: terminal
