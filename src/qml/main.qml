@@ -10,7 +10,7 @@ Meui.Window {
     minimumWidth: 400
     minimumHeight: 300
     width: 650
-    height: 520
+    height: 526
     visible: true
     id: rootWindow
     //title: qsTr("Terminal")
@@ -35,11 +35,21 @@ Meui.Window {
         shortcut: "Ctrl+Shift+Q"
     }
 
+    headerBar: Label {
+        Layout.fillWidth: true
+        Layout.margins: Meui.Units.largeSpacing
+        leftPadding: Meui.Units.largeSpacing * 1.5
+        text: session.title
+        font.family: fonts.fixedFont
+        font.pointSize: 9
+    }
+
     content: Rectangle {
-        anchors.fill: parent
-        anchors.margins: Meui.Units.smallSpacing
-        anchors.rightMargin: 1
-        anchors.topMargin: 0
+        Layout.fillWidth: true
+        Layout.fillHeight: true 
+        Layout.margins: Meui.Units.smallSpacing
+        Layout.rightMargin: 3
+        Layout.topMargin: 0
         color: "transparent"
         QMLTermWidget {
             id: terminal
