@@ -6,19 +6,15 @@ import QMLTermWidget 1.0
 import MeuiKit 1.0 as Meui
 import org.cyber.Terminal 1.0
 
-ApplicationWindow {
-    width: 640
-    height: 480
-    minimumWidth: 300
-    minimumHeight: 200
+Meui.Window {
+    minimumWidth: 400
+    minimumHeight: 300
+    width: 650
+    height: 520
     visible: true
     id: rootWindow
     //title: qsTr("Terminal")
     title: session.title + qsTr(" - Terminal")
-
-    background: Rectangle {
-        color: Meui.Theme.backgroundColor
-    }
 
     Fonts {
         id: fonts
@@ -39,40 +35,46 @@ ApplicationWindow {
         shortcut: "Ctrl+Shift+Q"
     }
 
-    QMLTermWidget {
-        id: terminal
+    content: Rectangle {
         anchors.fill: parent
-        font.family: fonts.fixedFont
-        font.pointSize: 9
-        colorScheme: "Linux"
-        
-        layer.enabled: true
-        layer.effect: OpacityMask {
-            maskSource: Rectangle {
-                width: terminal.width
-                height: terminal.height
-                radius: 4
+        anchors.margins: Meui.Units.smallSpacing
+        anchors.rightMargin: 1
+        color: "transparent"
+        QMLTermWidget {
+            id: terminal
+            anchors.fill: parent
+            font.family: fonts.fixedFont
+            font.pointSize: 9
+            colorScheme: "Linux"
+
+            layer.enabled: true
+            layer.effect: OpacityMask {
+                maskSource: Rectangle {
+                    width: terminal.width
+                    height: terminal.height
+                    radius: Meui.Units.largeSpacing
+                }
             }
-        }
 
-        session: QMLTermSession {
-            id: session
-            onFinished: Qt.callLater(Qt.quit)
-        }
+            session: QMLTermSession {
+                id: session
+                onFinished: Qt.callLater(Qt.quit)
+            }
 
-        Component.onCompleted: {
-            session.startShellProgram()
-            terminal.forceActiveFocus()
-        }
+            Component.onCompleted: {
+                session.startShellProgram()
+                terminal.forceActiveFocus()
+            }
 
-        QMLTermScrollbar {
-            terminal: terminal
-            width: 10
-            Rectangle {
-                opacity: 0.4
-                anchors.margins: 2
-                radius: width * 0.5
-                anchors.fill: parent
+            QMLTermScrollbar {
+                terminal: terminal
+                width: 16 + 8
+                Rectangle {
+                    opacity: 0.4
+                    anchors.margins: 8
+                    radius: width * 0.5
+                    anchors.fill: parent
+                }
             }
         }
     }
