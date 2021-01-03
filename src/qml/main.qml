@@ -42,6 +42,8 @@ Meui.Window {
         text: session.title
         font.family: fonts.fixedFont
         font.pointSize: 9
+        clip: true
+        elide: Text.ElideRight
     }
 
     content: Rectangle {
