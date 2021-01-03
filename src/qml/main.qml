@@ -48,7 +48,7 @@ Meui.Window {
         Layout.fillWidth: true
         Layout.fillHeight: true 
         Layout.margins: Meui.Units.smallSpacing
-        Layout.rightMargin: 3
+        Layout.rightMargin: -1
         Layout.topMargin: 0
         color: "transparent"
         QMLTermWidget {
