@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.12
-import QMLTermWidget 1.0
+import org.cyber.QMLTermWidget 1.0
 import MeuiKit 1.0 as Meui
 import org.cyber.Terminal 1.0
 
@@ -49,25 +49,18 @@ Meui.Window {
     content: Rectangle {
         Layout.fillWidth: true
         Layout.fillHeight: true 
-        Layout.margins: Meui.Units.smallSpacing
-        Layout.rightMargin: -1
-        Layout.topMargin: 0
-        color: "transparent"
+        //Layout.margins: Meui.Units.smallSpacing
+        Layout.rightMargin: -4
+        //Layout.topMargin: 0
+        color: Meui.Theme.secondBackgroundColor
         QMLTermWidget {
             id: terminal
-            anchors.fill: parent
+            width: parent.width - 16
+            height: parent.height - 16
+            anchors.centerIn: parent
             font.family: fonts.fixedFont
             font.pointSize: 9
-            colorScheme: "Linux"
-
-            layer.enabled: true
-            layer.effect: OpacityMask {
-                maskSource: Rectangle {
-                    width: terminal.width
-                    height: terminal.height
-                    radius: Meui.Units.largeSpacing
-                }
-            }
+            colorScheme: Meui.Theme.darkMode ? "Meui-Dark" : "Meui-Light"
 
             session: QMLTermSession {
                 id: session
