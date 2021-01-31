@@ -46,13 +46,10 @@ Meui.Window {
         elide: Text.ElideRight
     }
 
-    content: Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true 
-        //Layout.margins: Meui.Units.smallSpacing
-        Layout.rightMargin: -4
-        //Layout.topMargin: 0
+    Rectangle {
+        anchors.fill: parent
         color: Meui.Theme.secondBackgroundColor
+
         QMLTermWidget {
             id: terminal
             width: parent.width - 16
