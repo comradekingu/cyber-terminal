@@ -13,8 +13,8 @@ Meui.Window {
     height: 526
     visible: true
     id: rootWindow
-    //title: qsTr("Terminal")
     title: session.title + qsTr(" - Terminal")
+    hideHeaderOnMaximize: true
 
     Fonts {
         id: fonts
