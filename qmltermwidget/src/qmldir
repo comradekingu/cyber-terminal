@@ -1,4 +1,4 @@
-module org.cyber.QMLTermWidget
-plugin qmltermwidget
+module Cyber.TermWidget
+plugin cyberqmltermwidget
 QMLTermScrollbar 1.0 QMLTermScrollbar.qml
 

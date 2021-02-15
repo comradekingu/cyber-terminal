@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import org.cyber.QMLTermWidget 1.0
+import Cyber.TermWidget 1.0
 
 Item {
     property QMLTermWidget terminal

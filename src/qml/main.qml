@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.12
-import org.cyber.QMLTermWidget 1.0
+import Cyber.TermWidget 1.0
 import MeuiKit 1.0 as Meui
 import org.cyber.Terminal 1.0
 

@@ -6,7 +6,7 @@
 class QmltermwidgetPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.cyber.QMLTermWidget")
+    Q_PLUGIN_METADATA(IID "Cyber.TermWidget")
     
 public:
     void registerTypes(const char *uri);

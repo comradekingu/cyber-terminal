@@ -14,6 +14,22 @@ set(QT Core Gui Quick QuickControls2 Widgets)
 find_package(Qt5 REQUIRED ${QT})
 find_package(MeuiKit REQUIRED)
 
+# Get the installation directory from qmake
+get_target_property(QT_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
+if(NOT QT_QMAKE_EXECUTABLE)
+    message(FATAL_ERROR "qmake is not found.")
+endif()
+
+execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_QML
+    OUTPUT_VARIABLE INSTALL_QMLDIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+if(INSTALL_QMLDIR)
+    message(STATUS "qml directory:" "${INSTALL_QMLDIR}")
+else()
+    message(FATAL_ERROR "qml directory cannot be detected.")
+endif()
+
 set(SRCS
     src/main.cpp
     src/fonts.cpp
@@ -23,6 +39,7 @@ set(RESOURCES
     src/resources.qrc
 )
 
+add_subdirectory(qmltermwidget)
 add_executable(${PROJECT_NAME} ${SRCS} ${RESOURCES})
 target_link_libraries(${PROJECT_NAME}
         Qt5::Core
