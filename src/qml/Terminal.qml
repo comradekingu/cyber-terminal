@@ -28,6 +28,7 @@ Item {
         session: QMLTermSession {
             id: _session
             onFinished: Qt.callLater(Qt.quit)
+            initialWorkingDirectory: "$HOME"
         }
 
         Component.onCompleted: {
@@ -37,12 +38,14 @@ Item {
 
         QMLTermScrollbar {
             terminal: _terminal
-            width: 16 + 8
+            width: _terminal.fontMetrics.width * 0.75
+
             Rectangle {
-                opacity: 0.4
-                anchors.margins: 8
-                radius: width * 0.5
                 anchors.fill: parent
+                anchors.rightMargin: 1
+                radius: width * 0.5
+                opacity: 0.5
+                color: Meui.Theme.darkMode ? "white" : "black"
             }
         }
     }

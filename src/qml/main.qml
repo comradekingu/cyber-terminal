@@ -55,16 +55,16 @@ Meui.Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 orientation: ListView.Horizontal
-                clip: true
-                spacing: Meui.Units.smallSpacing
+                spacing: Meui.Units.largeSpacing
                 currentIndex: _view.currentIndex
                 highlightFollowsCurrentItem: true
                 highlightMoveDuration: 0
                 highlightResizeDuration: 0
+                clip: true
 
                 delegate: Item {
                     height: _tabView.height
-                    width: 100
+                    width: Math.min(_tabName.implicitWidth, 200)
 
                     property bool isCurrent: _tabView.currentIndex === index
 
@@ -79,11 +79,17 @@ Meui.Window {
                         radius: Meui.Theme.smallRadius
                     }
 
-                    Label {
+                    Item {
                         anchors.fill: parent
-                        text: tabsModel.get(index).title
-                        elide: Label.ElideRight
-                        color: isCurrent ? Meui.Theme.highlightedTextColor : Meui.Theme.textColor
+                        anchors.margins: Meui.Units.smallSpacing
+
+                        Label {
+                            id: _tabName
+                            anchors.fill: parent
+                            text: tabsModel.get(index).title
+                            elide: Label.ElideRight
+                            color: isCurrent ? Meui.Theme.highlightedTextColor : Meui.Theme.textColor
+                        }
                     }
                 }
             }
