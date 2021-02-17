@@ -22,9 +22,7 @@ Item {
     QMLTermWidget {
         id: _terminal
         anchors.fill: parent
-
         font.family: fonts.fixedFont
-        font.pointSize: 9
         colorScheme: Meui.Theme.darkMode ? "Meui-Dark" : "Meui-Light"
 
         session: QMLTermSession {

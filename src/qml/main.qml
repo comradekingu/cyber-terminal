@@ -11,8 +11,8 @@ import org.cyber.Terminal 1.0
 Meui.Window {
     minimumWidth: 400
     minimumHeight: 300
-    width: 650
-    height: 526
+    width: 900
+    height: 600
     visible: true
     id: rootWindow
     title: currentItem && currentItem.terminal ? currentItem.terminal.session.title : ""
@@ -58,6 +58,9 @@ Meui.Window {
                 clip: true
                 spacing: Meui.Units.smallSpacing
                 currentIndex: _view.currentIndex
+                highlightFollowsCurrentItem: true
+                highlightMoveDuration: 0
+                highlightResizeDuration: 0
 
                 delegate: Item {
                     height: _tabView.height
