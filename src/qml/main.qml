@@ -11,8 +11,8 @@ import org.cyber.Terminal 1.0
 Meui.Window {
     minimumWidth: 400
     minimumHeight: 300
-    width: 900
-    height: 600
+    width: 650
+    height: 550
     visible: true
     id: rootWindow
     title: currentItem && currentItem.terminal ? currentItem.terminal.session.title : ""
@@ -66,7 +66,7 @@ Meui.Window {
 
                 delegate: Item {
                     height: _tabView.height
-                    width: Math.min(_tabName.implicitWidth, 200)
+                    width: Math.min(_tabName.implicitWidth, 200) + Meui.Units.largeSpacing
 
                     property bool isCurrent: _tabView.currentIndex === index
 
@@ -90,6 +90,8 @@ Meui.Window {
                             anchors.fill: parent
                             text: tabsModel.get(index).title
                             elide: Label.ElideRight
+                            font.family: fonts.fixedFont
+                            font.pointSize: 9
                             color: isCurrent ? Meui.Theme.highlightedTextColor : Meui.Theme.textColor
                         }
                     }
@@ -99,7 +101,7 @@ Meui.Window {
             Meui.WindowButton {
                 size: 35
                 source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + "add.svg"
-                onClicked: openNewTab("~")
+                onClicked: openNewTab("$HOME")
             }
         }
     }
@@ -137,12 +139,15 @@ Meui.Window {
         if (component.status === Component.Ready) {
             const object = component.createObject(tabsModel, {'path': path})
             tabsModel.append(object)
-            _view.currentIndex = tabsModel.count - 1
+            const index = tabsModel.count - 1
+            _view.currentIndex = index
+            object.terminalClosed.connect(() => closeTab(index))
         }
 
     }
 
     function closeTab(index) {
         tabsModel.remove(index)
+        if (tabsModel.count == 0) Qt.quit()
     }
 }
