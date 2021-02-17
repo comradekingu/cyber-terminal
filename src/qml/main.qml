@@ -1,7 +1,9 @@
 import QtQuick 2.15
+import QtQml.Models 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.12
+
 import Cyber.TermWidget 1.0
 import MeuiKit 1.0 as Meui
 import org.cyber.Terminal 1.0
@@ -13,72 +15,122 @@ Meui.Window {
     height: 526
     visible: true
     id: rootWindow
-    title: session.title + qsTr(" - Terminal")
-    hideHeaderOnMaximize: true
+    title: currentItem && currentItem.terminal ? currentItem.terminal.session.title : ""
+
+    headerBarHeight: 40 + Meui.Units.largeSpacing
+
+    property alias currentItem: _view.currentItem
+    readonly property QMLTermWidget currentTerminal: currentItem.terminal
+
+    ObjectModel { id: tabsModel }
 
     Fonts {
         id: fonts
     }
 
     Action {
-        onTriggered: terminal.copyClipboard()
+        onTriggered: currentTerminal.copyClipboard()
         shortcut: "Ctrl+Shift+C"
     }
 
     Action {
-        onTriggered: terminal.pasteClipboard()
+        onTriggered: currentTerminal.pasteClipboard()
         shortcut: "Ctrl+Shift+V"
     }
-    
+
     Action {
         onTriggered: Qt.quit()
         shortcut: "Ctrl+Shift+Q"
     }
 
-    headerBar: Label {
-        Layout.fillWidth: true
-        Layout.margins: Meui.Units.largeSpacing
-        leftPadding: Meui.Units.largeSpacing * 1.5
-        text: session.title
-        font.family: fonts.fixedFont
-        font.pointSize: 9
-        clip: true
-        elide: Text.ElideRight
-    }
+    headerBar: Item {
+        RowLayout {
+            anchors.fill: parent
+            anchors.margins: Meui.Units.smallSpacing
+            spacing: Meui.Units.smallSpacing
 
-    Rectangle {
-        anchors.fill: parent
-        color: Meui.Theme.secondBackgroundColor
+            ListView {
+                id: _tabView
+                model: tabsModel.count
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                orientation: ListView.Horizontal
+                clip: true
+                spacing: Meui.Units.smallSpacing
+                currentIndex: _view.currentIndex
 
-        QMLTermWidget {
-            id: terminal
-            width: parent.width - 16
-            height: parent.height - 16
-            anchors.centerIn: parent
-            font.family: fonts.fixedFont
-            font.pointSize: 9
-            colorScheme: Meui.Theme.darkMode ? "Meui-Dark" : "Meui-Light"
+                delegate: Item {
+                    height: _tabView.height
+                    width: 100
 
-            session: QMLTermSession {
-                id: session
-                onFinished: Qt.callLater(Qt.quit)
-            }
+                    property bool isCurrent: _tabView.currentIndex === index
 
-            Component.onCompleted: {
-                session.startShellProgram()
-                terminal.forceActiveFocus()
-            }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: _view.currentIndex = index
+                    }
 
-            QMLTermScrollbar {
-                terminal: terminal
-                width: 16 + 8
-                Rectangle {
-                    opacity: 0.4
-                    anchors.margins: 8
-                    radius: width * 0.5
-                    anchors.fill: parent
+                    Rectangle {
+                        anchors.fill: parent
+                        color: isCurrent ? Meui.Theme.highlightColor : "transparent"
+                        radius: Meui.Theme.smallRadius
+                    }
+
+                    Label {
+                        anchors.fill: parent
+                        text: tabsModel.get(index).title
+                        elide: Label.ElideRight
+                        color: isCurrent ? Meui.Theme.highlightedTextColor : Meui.Theme.textColor
+                    }
                 }
             }
+
+            Button {
+                text: "+"
+                onClicked: openNewTab("~")
+                focusPolicy: Qt.NoFocus
+            }
         }
+    }
+
+    ListView {
+        id: _view
+        anchors.fill: parent
+        clip: true
+        focus: true
+        orientation: ListView.Horizontal
+        model: tabsModel
+        snapMode: ListView.SnapOneItem
+        spacing: 0
+        highlightFollowsCurrentItem: true
+        highlightMoveDuration: 0
+        highlightResizeDuration: 0
+        highlightRangeMode: ListView.StrictlyEnforceRange
+        preferredHighlightBegin: 0
+        preferredHighlightEnd: width
+        highlight: Item {}
+        highlightMoveVelocity: -1
+        highlightResizeVelocity: -1
+        onMovementEnded: _view.currentIndex = indexAt(contentX, contentY)
+        boundsBehavior: Flickable.StopAtBounds
+        onCurrentItemChanged: currentItem.forceActiveFocus()
+    }
+
+    Component.onCompleted: {
+        openNewTab("$HOME")
+    }
+
+    function openNewTab(path) {
+        const component = Qt.createComponent("Terminal.qml");
+        if (component.status === Component.Ready) {
+            const object = component.createObject(tabsModel, {'path': path})
+            tabsModel.append(object)
+            _view.currentIndex = tabsModel.count - 1
+        }
+
+    }
+
+    function closeTab(index) {
+        tabsModel.remove(index)
     }
 }
