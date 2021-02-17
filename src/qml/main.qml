@@ -114,6 +114,7 @@ Meui.Window {
         onMovementEnded: _view.currentIndex = indexAt(contentX, contentY)
         boundsBehavior: Flickable.StopAtBounds
         onCurrentItemChanged: currentItem.forceActiveFocus()
+        interactive: false
     }
 
     Component.onCompleted: {
