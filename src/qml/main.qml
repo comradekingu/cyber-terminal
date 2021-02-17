@@ -77,7 +77,14 @@ Meui.Window {
 
                     Rectangle {
                         anchors.fill: parent
-                        color: isCurrent ? Meui.Theme.highlightColor : "transparent"
+                        color: isCurrent ?
+                            Meui.Theme.highlightColor :
+                            Qt.rgba(
+                                Meui.Theme.textColor.r,
+                                Meui.Theme.textColor.g,
+                                Meui.Theme.textColor.b,
+                                0.1
+                            )
                         radius: Meui.Theme.smallRadius
                     }
 
