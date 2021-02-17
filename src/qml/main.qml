@@ -46,7 +46,9 @@ Meui.Window {
     headerBar: Item {
         RowLayout {
             anchors.fill: parent
-            anchors.margins: Meui.Units.smallSpacing
+            anchors.leftMargin: Meui.Units.smallSpacing
+            anchors.topMargin: Meui.Units.smallSpacing
+            anchors.bottomMargin: Meui.Units.smallSpacing
             spacing: Meui.Units.smallSpacing
 
             ListView {
@@ -94,10 +96,10 @@ Meui.Window {
                 }
             }
 
-            Button {
-                text: "+"
+            Meui.WindowButton {
+                size: 35
+                source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + "add.svg"
                 onClicked: openNewTab("~")
-                focusPolicy: Qt.NoFocus
             }
         }
     }
