@@ -50,7 +50,7 @@ Meui.Window {
     }
 
     Action {
-        onTriggered: rootWindow.openNewTab("$HOME")
+        onTriggered: rootWindow.openNewTab()
         shortcut: "Ctrl+Shift+T"
     }
 
@@ -140,7 +140,7 @@ Meui.Window {
             Meui.WindowButton {
                 size: 35
                 source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + "add.svg"
-                onClicked: openNewTab("$HOME")
+                onClicked: rootWindow.openNewTab()
             }
         }
     }
@@ -170,10 +170,18 @@ Meui.Window {
     }
 
     Component.onCompleted: {
-        openNewTab("$HOME")
+        openTab("$HOME")
     }
 
-    function openNewTab(path) {
+    function openNewTab() {
+        if (currentTerminal) {
+            openTab(currentTerminal.session.currentDir)
+        } else {
+            openTab("$HOME")
+        }
+    }
+
+    function openTab(path) {
         const component = Qt.createComponent("Terminal.qml");
         if (component.status === Component.Ready) {
             const object = component.createObject(tabsModel, {'path': path})

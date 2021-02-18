@@ -20,6 +20,7 @@ Item {
     property string path
     property alias terminal: _terminal
     property string title: _session.title
+    readonly property QMLTermSession session: _session
 
     Rectangle {
         color: Meui.Theme.secondBackgroundColor
@@ -35,7 +36,7 @@ Item {
             session: QMLTermSession {
                 id: _session
                 onFinished: control.terminalClosed()
-                initialWorkingDirectory: "$HOME"
+                initialWorkingDirectory: control.path
             }
 
             Component.onCompleted: {
