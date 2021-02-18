@@ -29,8 +29,7 @@ Item {
             anchors.fill: parent
             anchors.margins: Meui.Units.largeSpacing
             font.family: fonts.fixedFont
-            // The default is way too big.
-            font.pointSize: 9
+            font.pointSize: settings.fontPointSize
             colorScheme: Meui.Theme.darkMode ? "Meui-Dark" : "Meui-Light"
 
             session: QMLTermSession {
