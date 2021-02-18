@@ -32,6 +32,7 @@ Item {
             font.family: fonts.fixedFont
             font.pointSize: settings.fontPointSize
             colorScheme: Meui.Theme.darkMode ? "Meui-Dark" : "Meui-Light"
+            blinkingCursor: settings.blinkingCursor
 
             session: QMLTermSession {
                 id: _session

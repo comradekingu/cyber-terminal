@@ -25,10 +25,25 @@ Meui.Window {
     onClosing: {
         settings.width = rootWindow.width
         settings.height = rootWindow.height
+
+        // Exit prompt.
+        for (var i = 0; i < tabsModel.count; ++i) {
+            var obj = tabsModel.get(i)
+            if (obj.session.hasActiveProcess) {
+                exitPrompt.visible = true
+                close.accepted = false
+                break
+            }
+        }
     }
 
     GlobalSettings { id: settings }
     ObjectModel { id: tabsModel }
+
+    ExitPromptDialog {
+        id: exitPrompt
+        onOkBtnClicked: Qt.quit()
+    }
 
     Fonts {
         id: fonts
