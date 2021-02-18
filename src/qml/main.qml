@@ -59,6 +59,11 @@ Meui.Window {
         shortcut: "Ctrl+Shift+W"
     }
 
+    Action {
+        onTriggered: rootWindow.toggleTab()
+        shortcut: "Ctrl+Tab"
+    }
+
     headerBar: Item {
         RowLayout {
             anchors.fill: parent
@@ -183,5 +188,14 @@ Meui.Window {
     function closeTab(index) {
         tabsModel.remove(index)
         if (tabsModel.count == 0) Qt.quit()
+    }
+
+    function toggleTab() {
+        var nextIndex = _view.currentIndex
+        ++nextIndex
+        if (nextIndex > tabsModel.count - 1)
+            nextIndex = 0
+
+        _view.currentIndex = nextIndex
     }
 }
