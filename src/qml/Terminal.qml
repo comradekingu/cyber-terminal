@@ -28,7 +28,7 @@ Item {
         QMLTermWidget {
             id: _terminal
             anchors.fill: parent
-            anchors.margins: Meui.Units.largeSpacing
+            anchors.margins: Meui.Units.smallSpacing
             font.family: fonts.fixedFont
             font.pointSize: settings.fontPointSize
             colorScheme: Meui.Theme.darkMode ? "Meui-Dark" : "Meui-Light"
