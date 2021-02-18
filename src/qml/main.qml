@@ -87,7 +87,9 @@ Meui.Window {
                     property bool isCurrent: _tabView.currentIndex === index
 
                     MouseArea {
+                        id: _mouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
                         onClicked: _view.currentIndex = index
                     }
 
@@ -104,18 +106,27 @@ Meui.Window {
                         radius: Meui.Theme.smallRadius
                     }
 
-                    Item {
+                    RowLayout {
                         anchors.fill: parent
                         anchors.margins: Meui.Units.smallSpacing
+                        spacing: 0
 
                         Label {
                             id: _tabName
-                            anchors.fill: parent
+                            Layout.fillWidth: true
                             text: tabsModel.get(index).title
                             elide: Label.ElideRight
                             font.family: fonts.fixedFont
                             font.pointSize: 9
                             color: isCurrent ? Meui.Theme.highlightedTextColor : Meui.Theme.textColor
+                        }
+
+                        ImageButton {
+                            Layout.fillHeight: true
+                            size: height
+                            source: "qrc:/images/" + (Meui.Theme.darkMode || isCurrent ? "dark/" : "light/") + "close.svg"
+                            onClicked: closeTab(index)
+                            visible: _mouseArea.containsMouse
                         }
                     }
                 }

@@ -5,5 +5,8 @@
         <file>images/dark/add.svg</file>
         <file>images/light/add.svg</file>
         <file>qml/GlobalSettings.qml</file>
+        <file>images/light/close.svg</file>
+        <file>images/dark/close.svg</file>
+        <file>qml/ImageButton.qml</file>
     </qresource>
 </RCC>
