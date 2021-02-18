@@ -11,8 +11,8 @@ import org.cyber.Terminal 1.0
 Meui.Window {
     minimumWidth: 400
     minimumHeight: 300
-    width: 650
-    height: 550
+    width: settings.width
+    height: settings.height
     visible: true
     id: rootWindow
     title: currentItem && currentItem.terminal ? currentItem.terminal.session.title : ""
@@ -22,6 +22,12 @@ Meui.Window {
     property alias currentItem: _view.currentItem
     readonly property QMLTermWidget currentTerminal: currentItem.terminal
 
+    onClosing: {
+        settings.width = rootWindow.width
+        settings.height = rootWindow.height
+    }
+
+    GlobalSettings { id: settings }
     ObjectModel { id: tabsModel }
 
     Fonts {
@@ -41,6 +47,16 @@ Meui.Window {
     Action {
         onTriggered: Qt.quit()
         shortcut: "Ctrl+Shift+Q"
+    }
+
+    Action {
+        onTriggered: rootWindow.openNewTab("$HOME")
+        shortcut: "Ctrl+Shift+T"
+    }
+
+    Action {
+        onTriggered: rootWindow.closeTab(_view.currentIndex)
+        shortcut: "Ctrl+Shift+W"
     }
 
     headerBar: Item {

@@ -4,5 +4,6 @@
         <file>qml/Terminal.qml</file>
         <file>images/dark/add.svg</file>
         <file>images/light/add.svg</file>
+        <file>qml/GlobalSettings.qml</file>
     </qresource>
 </RCC>
