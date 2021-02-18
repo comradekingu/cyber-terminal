@@ -19,6 +19,11 @@ Window {
 
     signal okBtnClicked
 
+    Rectangle {
+        anchors.fill: parent
+        color: Meui.Theme.backgroundColor
+    }
+
     ColumnLayout {
         id: _mainLayout
         anchors.fill: parent
