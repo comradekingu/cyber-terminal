@@ -462,8 +462,8 @@ void QTermWidget::setColorScheme(const QString& origName)
     if (! cs)
     {
         QMessageBox::information(this,
-                                 tr("Color Scheme Error"),
-                                 tr("Cannot load color scheme: %1").arg(name));
+                                 QString("Color Scheme Error"),
+                                 QString("Cannot load color scheme: %1").arg(name));
         return;
     }
     ColorEntry table[TABLE_COLORS];

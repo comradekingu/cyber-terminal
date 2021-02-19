@@ -541,13 +541,13 @@ QList<QAction*> UrlFilter::HotSpot::actions(QWidget* parent)
 
     if ( kind == StandardUrl )
     {
-        openAction->setText(QObject::tr("Open Link"));
-        copyAction->setText(QObject::tr("Copy Link Address"));
+        openAction->setText(QString("Open Link"));
+        copyAction->setText(QString("Copy Link Address"));
     }
     else if ( kind == Email )
     {
-        openAction->setText(QObject::tr("Send Email To..."));
-        copyAction->setText(QObject::tr("Copy Email Address"));
+        openAction->setText(QString("Send Email To..."));
+        copyAction->setText(QString("Copy Email Address"));
     }
 
     // object names are set here so that the hotspot performs the

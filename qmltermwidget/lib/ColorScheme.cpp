@@ -275,7 +275,7 @@ void ColorScheme::read(const QString & fileName)
     QSettings s(fileName, QSettings::IniFormat);
     s.beginGroup(QLatin1String("General"));
 
-    _description = s.value(QLatin1String("Description"), QObject::tr("Un-named Color Scheme")).toString();
+    _description = s.value(QLatin1String("Description"), QString("Un-named Color Scheme"));
     _opacity = s.value(QLatin1String("Opacity"),qreal(1.0)).toDouble();
     s.endGroup();
 
@@ -290,9 +290,9 @@ void ColorScheme::read(KConfig& config)
 {
     KConfigGroup configGroup = config.group("General");
 
-    QString description = configGroup.readEntry("Description", QObject::tr("Un-named Color Scheme"));
+    QString description = configGroup.readEntry("Description", QString("Un-named Color Scheme"));
 
-    _description = tr(description.toUtf8());
+    _description = QString(description.toUtf8());
     _opacity = configGroup.readEntry("Opacity",qreal(1.0));
 
     for (int i=0 ; i < TABLE_COLORS ; i++)
@@ -461,7 +461,7 @@ AccessibleColorScheme::AccessibleColorScheme()
 // It's not finished in konsole and it breaks Qt4 compilation as well
     // basic attributes
     setName("accessible");
-    setDescription(QObject::tr("Accessible Color Scheme"));
+    setDescription(QString("Accessible Color Scheme"));
 
     // setup colors
     const int ColorRoleCount = 8;
