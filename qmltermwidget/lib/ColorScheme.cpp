@@ -275,7 +275,7 @@ void ColorScheme::read(const QString & fileName)
     QSettings s(fileName, QSettings::IniFormat);
     s.beginGroup(QLatin1String("General"));
 
-    _description = s.value(QLatin1String("Description"), QString("Un-named Color Scheme"));
+    _description = QLatin1String("Color Scheme");
     _opacity = s.value(QLatin1String("Opacity"),qreal(1.0)).toDouble();
     s.endGroup();
 
