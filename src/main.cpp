@@ -20,6 +20,9 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QLocale>
+#include <QTranslator>
+#include <QFile>
 
 #include "fonts.h"
 
@@ -39,6 +42,18 @@ int main(int argc, char *argv[])
 
     const char *uri = "org.cyber.Terminal";
     qmlRegisterType<Fonts>(uri, 1, 0, "Fonts");
+
+    // Translations
+    QLocale locale;
+    QString qmFilePath = QString("%1/%2.qm").arg("/usr/share/cyber-terminal/translations/").arg(locale.name());
+    if (QFile::exists(qmFilePath)) {
+        QTranslator *translator = new QTranslator(QGuiApplication::instance());
+        if (translator->load(qmFilePath)) {
+            QGuiApplication::installTranslator(translator);
+        } else {
+            translator->deleteLater();
+        }
+    }
 
     engine.addImportPath(QStringLiteral("qrc:/"));
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));

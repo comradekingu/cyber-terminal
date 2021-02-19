@@ -27,7 +27,6 @@ set(TERMWIDGET_SRCS
     lib/ProcessInfo.h
     lib/Screen.h
     lib/ScreenWindow.h
-    #lib/SearchBar.h
     lib/Session.h
     lib/ShellCommand.h
     lib/TerminalCharacterDecoder.h
@@ -35,7 +34,6 @@ set(TERMWIDGET_SRCS
     lib/tools.h
     lib/Vt102Emulation.h
     lib/mac-vkcode.h
-    #lib/qtermwidget.h
     lib/BlockArray.cpp
     lib/ColorScheme.cpp
     lib/Emulation.cpp
@@ -50,10 +48,8 @@ set(TERMWIDGET_SRCS
     lib/kptyprocess.cpp
     lib/ProcessInfo.cpp
     lib/Pty.cpp
-    #lib/qtermwidget.cpp
     lib/Screen.cpp
     lib/ScreenWindow.cpp
-    #lib/SearchBar.cpp
     lib/Session.cpp
     lib/ShellCommand.cpp
     lib/TerminalCharacterDecoder.cpp

@@ -10,7 +10,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(QT Core Gui Quick QuickControls2 Widgets)
+set(QT Core Gui Quick QuickControls2 Widgets LinguistTools)
 find_package(Qt5 REQUIRED ${QT})
 find_package(MeuiKit REQUIRED)
 
@@ -48,6 +48,12 @@ target_link_libraries(${PROJECT_NAME}
         Qt5::Widgets
         MeuiKit
 )
+
+file(GLOB TS_FILES translations/*.ts)
+qt5_create_translation(QM_FILES ${TS_FILES})
+add_custom_target(translations DEPENDS ${QM_FILES} SOURCES ${TS_FILES})
+add_dependencies(${PROJECT_NAME} translations)
+install(FILES ${QM_FILES} DESTINATION /usr/share/cyber-terminal/translations)
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION /usr/bin)
 
