@@ -16,7 +16,7 @@
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="48"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">取消</translation>
     </message>
 </context>
 </TS>
