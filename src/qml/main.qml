@@ -102,7 +102,7 @@ Meui.Window {
 
                 delegate: Item {
                     height: _tabView.height
-                    width: Math.min(_tabName.implicitWidth, 200) + Meui.Units.largeSpacing
+                    width: Math.min(_layout.implicitWidth, 256) + Meui.Units.largeSpacing
 
                     property bool isCurrent: _tabView.currentIndex === index
 
@@ -117,16 +117,24 @@ Meui.Window {
                         anchors.fill: parent
                         color: isCurrent ?
                             Meui.Theme.highlightColor :
-                            Qt.rgba(
-                                Meui.Theme.textColor.r,
-                                Meui.Theme.textColor.g,
-                                Meui.Theme.textColor.b,
-                                0.1
-                            )
+                            _mouseArea.containsMouse ?
+                                Qt.rgba(
+                                    Meui.Theme.textColor.r,
+                                    Meui.Theme.textColor.g,
+                                    Meui.Theme.textColor.b,
+                                    0.25
+                                ) :
+                                Qt.rgba(
+                                    Meui.Theme.textColor.r,
+                                    Meui.Theme.textColor.g,
+                                    Meui.Theme.textColor.b,
+                                    0.1
+                                )
                         radius: Meui.Theme.smallRadius
                     }
 
                     RowLayout {
+                        id: _layout
                         anchors.fill: parent
                         anchors.margins: Meui.Units.smallSpacing
                         spacing: 0
@@ -146,7 +154,6 @@ Meui.Window {
                             size: height
                             source: "qrc:/images/" + (Meui.Theme.darkMode || isCurrent ? "dark/" : "light/") + "close.svg"
                             onClicked: closeTab(index)
-                            visible: _mouseArea.containsMouse
                         }
                     }
                 }
