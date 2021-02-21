@@ -102,7 +102,7 @@ Meui.Window {
 
                 delegate: Item {
                     height: _tabView.height
-                    width: Math.min(_tabName.implicitWidth, 200) + Meui.Units.largeSpacing
+                    width: Math.min(_layout.implicitWidth, 256) + Meui.Units.largeSpacing
 
                     property bool isCurrent: _tabView.currentIndex === index
 
@@ -117,16 +117,30 @@ Meui.Window {
                         anchors.fill: parent
                         color: isCurrent ?
                             Meui.Theme.highlightColor :
-                            Qt.rgba(
-                                Meui.Theme.textColor.r,
-                                Meui.Theme.textColor.g,
-                                Meui.Theme.textColor.b,
-                                0.1
-                            )
+                            _mouseArea.containsMouse ?
+                                Qt.rgba(
+                                    Meui.Theme.textColor.r,
+                                    Meui.Theme.textColor.g,
+                                    Meui.Theme.textColor.b,
+                                    0.25
+                                ) :
+                                Qt.rgba(
+                                    Meui.Theme.textColor.r,
+                                    Meui.Theme.textColor.g,
+                                    Meui.Theme.textColor.b,
+                                    0.1
+                                )
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 125
+                                easing.type: Easing.InOutCubic
+                            }
+                        }
                         radius: Meui.Theme.smallRadius
                     }
 
                     RowLayout {
+                        id: _layout
                         anchors.fill: parent
                         anchors.margins: Meui.Units.smallSpacing
                         spacing: 0
@@ -134,7 +148,7 @@ Meui.Window {
                         Label {
                             id: _tabName
                             Layout.fillWidth: true
-                            text: tabsModel.get(index).title
+                            text: tabsModel.get(index).title !== "" ? tabsModel.get(index).title : `Tab #${index + 1}`
                             elide: Label.ElideRight
                             font.family: fonts.fixedFont
                             font.pointSize: 9
@@ -146,7 +160,6 @@ Meui.Window {
                             size: height
                             source: "qrc:/images/" + (Meui.Theme.darkMode || isCurrent ? "dark/" : "light/") + "close.svg"
                             onClicked: closeTab(index)
-                            visible: _mouseArea.containsMouse
                         }
                     }
                 }
