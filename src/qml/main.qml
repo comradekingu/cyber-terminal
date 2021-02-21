@@ -130,6 +130,12 @@ Meui.Window {
                                     Meui.Theme.textColor.b,
                                     0.1
                                 )
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 125
+                                easing.type: Easing.InOutCubic
+                            }
+                        }
                         radius: Meui.Theme.smallRadius
                     }
 
@@ -142,7 +148,7 @@ Meui.Window {
                         Label {
                             id: _tabName
                             Layout.fillWidth: true
-                            text: tabsModel.get(index).title
+                            text: tabsModel.get(index).title !== "" ? tabsModel.get(index).title : `Tab #${index + 1}`
                             elide: Label.ElideRight
                             font.family: fonts.fixedFont
                             font.pointSize: 9
