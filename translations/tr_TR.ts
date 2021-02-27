@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="32"/>
         <source>Process is running, are you sure you want to quit?</source>
-        <translation type="unfinished"></translation>
+        <translation>İşlem hala çalışıyor, çıkmak istediğinize emin misiniz?</translation>
     </message>
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="40"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamam</translation>
     </message>
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="48"/>
