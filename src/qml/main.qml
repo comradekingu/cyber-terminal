@@ -17,7 +17,7 @@ Meui.Window {
     id: rootWindow
     title: currentItem && currentItem.terminal ? currentItem.terminal.session.title : ""
 
-    headerBarHeight: 40 + Meui.Units.largeSpacing
+    headerBarHeight: 40 + Meui.Units.smallSpacing
 
     property alias currentItem: _view.currentItem
     readonly property QMLTermWidget currentTerminal: currentItem.terminal
@@ -93,12 +93,12 @@ Meui.Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 orientation: ListView.Horizontal
-                spacing: Meui.Units.largeSpacing
+                spacing: Meui.Units.smallSpacing
                 currentIndex: _view.currentIndex
                 highlightFollowsCurrentItem: true
                 highlightMoveDuration: 0
                 highlightResizeDuration: 0
-                clip: true
+                clip: false
 
                 delegate: Item {
                     height: _tabView.height
@@ -115,28 +115,27 @@ Meui.Window {
 
                     Rectangle {
                         anchors.fill: parent
+                        anchors.bottomMargin: isCurrent ? -radius * 2 : 0
+                        Behavior on anchors.bottomMargin {
+                            NumberAnimation {
+                                duration: 250
+                                easing.type: Easing.InOutCubic
+                            }
+                        }
                         color: isCurrent ?
-                            Meui.Theme.highlightColor :
+                            Meui.Theme.secondBackgroundColor :
                             _mouseArea.containsMouse ?
-                                Qt.rgba(
-                                    Meui.Theme.textColor.r,
-                                    Meui.Theme.textColor.g,
-                                    Meui.Theme.textColor.b,
-                                    0.25
-                                ) :
-                                Qt.rgba(
-                                    Meui.Theme.textColor.r,
-                                    Meui.Theme.textColor.g,
-                                    Meui.Theme.textColor.b,
-                                    0.1
-                                )
+                                Meui.Theme.darkMode ?
+                                    Qt.darker(Meui.Theme.backgroundColor, 0.7) :
+                                    Qt.darker(Meui.Theme.backgroundColor, 1.1) :
+                                Meui.Theme.backgroundColor
                         Behavior on color {
                             ColorAnimation {
                                 duration: 125
                                 easing.type: Easing.InOutCubic
                             }
                         }
-                        radius: Meui.Theme.smallRadius
+                        radius: Meui.Theme.bigRadius
                     }
 
                     RowLayout {
@@ -152,13 +151,14 @@ Meui.Window {
                             elide: Label.ElideRight
                             font.family: fonts.fixedFont
                             font.pointSize: 9
-                            color: isCurrent ? Meui.Theme.highlightedTextColor : Meui.Theme.textColor
+                            color: Meui.Theme.textColor
                         }
 
                         ImageButton {
                             Layout.fillHeight: true
+                            Layout.leftMargin: Meui.Units.smallSpacing
                             size: height
-                            source: "qrc:/images/" + (Meui.Theme.darkMode || isCurrent ? "dark/" : "light/") + "close.svg"
+                            source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + "close.svg"
                             onClicked: closeTab(index)
                         }
                     }
@@ -216,14 +216,14 @@ Meui.Window {
             tabsModel.append(object)
             const index = tabsModel.count - 1
             _view.currentIndex = index
-            object.terminalClosed.connect(() => closeTab(index))
+            object.terminalClosed.connect(() => closeTab(_view.currentIndex))
         }
-
     }
 
     function closeTab(index) {
         tabsModel.remove(index)
         if (tabsModel.count == 0) Qt.quit()
+        if (index !== 0) _view.currentIndex = index - 1
     }
 
     function toggleTab() {
