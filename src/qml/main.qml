@@ -82,16 +82,43 @@ Meui.Window {
     headerBar: Item {
         RowLayout {
             anchors.fill: parent
-            anchors.leftMargin: Meui.Units.smallSpacing
+            anchors.rightMargin: -140
+            spacing: 0
+            z: -1
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            Item {
+                Layout.fillHeight: true
+                width: 140 + 35 + Meui.Units.largeSpacing * 2
+                LinearGradient {
+                    anchors.fill: parent
+                    start: Qt.point(0, 0)
+                    end: Qt.point(parent.width, 0)
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: "transparent" }
+                        GradientStop { position: 0.1; color: Meui.Theme.backgroundColor }
+                    }
+                }
+            }
+        }
+
+        RowLayout {
+            anchors.fill: parent
             anchors.topMargin: Meui.Units.smallSpacing
             anchors.bottomMargin: Meui.Units.smallSpacing
+            anchors.rightMargin: Meui.Units.largeSpacing + 35
             spacing: Meui.Units.smallSpacing
+            z: -20
 
             ListView {
                 id: _tabView
                 model: tabsModel.count
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                Layout.leftMargin: Meui.Units.smallSpacing
                 orientation: ListView.Horizontal
                 spacing: Meui.Units.smallSpacing
                 currentIndex: _view.currentIndex
@@ -115,13 +142,7 @@ Meui.Window {
 
                     Rectangle {
                         anchors.fill: parent
-                        anchors.bottomMargin: isCurrent ? -radius * 2 : 0
-                        Behavior on anchors.bottomMargin {
-                            NumberAnimation {
-                                duration: 250
-                                easing.type: Easing.InOutCubic
-                            }
-                        }
+                        anchors.bottomMargin: -radius * 2
                         color: isCurrent ?
                             Meui.Theme.secondBackgroundColor :
                             _mouseArea.containsMouse ?
@@ -142,11 +163,14 @@ Meui.Window {
                         id: _layout
                         anchors.fill: parent
                         anchors.margins: Meui.Units.smallSpacing
+                        anchors.topMargin: Meui.Units.smallSpacing / 2
                         spacing: 0
 
                         Label {
                             id: _tabName
                             Layout.fillWidth: true
+                            Layout.leftMargin: Meui.Units.smallSpacing
+                            Layout.alignment: Qt.AlignVCenter
                             text: tabsModel.get(index).title !== "" ? tabsModel.get(index).title : `Tab #${index + 1}`
                             elide: Label.ElideRight
                             font.family: fonts.fixedFont
@@ -155,14 +179,25 @@ Meui.Window {
                         }
 
                         ImageButton {
-                            Layout.fillHeight: true
-                            Layout.leftMargin: Meui.Units.smallSpacing
-                            size: height
+                            Layout.leftMargin: Meui.Units.largeSpacing
+                            Layout.alignment: Qt.AlignVCenter
+                            size: _tabName.height * 2
                             source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + "close.svg"
                             onClicked: closeTab(index)
                         }
                     }
                 }
+            }
+        }
+
+        RowLayout {
+            anchors.fill: parent
+            anchors.topMargin: Meui.Units.smallSpacing
+            anchors.bottomMargin: Meui.Units.smallSpacing
+            spacing: Meui.Units.smallSpacing
+
+            Item {
+                Layout.fillWidth: true
             }
 
             Meui.WindowButton {
@@ -195,6 +230,7 @@ Meui.Window {
         boundsBehavior: Flickable.StopAtBounds
         onCurrentItemChanged: currentItem.forceActiveFocus()
         interactive: false
+        z: 5
     }
 
     Component.onCompleted: {
