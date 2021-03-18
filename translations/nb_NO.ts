@@ -24,10 +24,5 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <location filename="../qmltermwidget/lib/Filter.cpp" line="544"/>
-        <source>Open Link</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 </TS>
