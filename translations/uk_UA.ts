@@ -6,17 +6,17 @@
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="32"/>
         <source>Process is running, are you sure you want to quit?</source>
-        <translation type="unfinished">Процес запущений. Ви впевнені, що хочете вийти?</translation>
+        <translation>На даний момент запущений процес, ви бажаєте закрити вікно терміналу?</translation>
     </message>
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="40"/>
         <source>OK</source>
-        <translation type="unfinished">гаразд</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="48"/>
         <source>Cancel</source>
-        <translation type="unfinished">Скасувати</translation>
+        <translation>Відмінити</translation>
     </message>
 </context>
 </TS>
