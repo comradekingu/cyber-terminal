@@ -6,7 +6,7 @@
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="32"/>
         <source>Process is running, are you sure you want to quit?</source>
-        <translation>有进程在运行中，您确定要退出吗？</translation>
+        <translation>进程正在运行，确定要退出吗?</translation>
     </message>
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="40"/>
@@ -16,7 +16,7 @@
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="48"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
 </context>
 </TS>
