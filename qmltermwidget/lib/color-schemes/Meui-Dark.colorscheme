@@ -1,11 +1,12 @@
 [Background]
 Bold=false
-#Color=0,0,0
 Color=21,21,21
+
 
 [BackgroundIntense]
 Bold=false
-Color=104,104,104
+Color=37,37,37
+
 
 [Color0]
 Bold=false
@@ -14,72 +15,72 @@ Color=21,21,21
 
 [Color0Intense]
 Bold=false
-Color=104,104,104
+Color=37,37,37
 
 
 [Color1]
 Bold=false
-Color=178,24,24
+Color=192,36,36
 
 
 [Color1Intense]
 Bold=false
-Color=255,84,84
+Color=255,35,35
 
 
 [Color2]
 Bold=false
-Color=24,178,24
+Color=37,194,98
 
 
 [Color2Intense]
 Bold=false
-Color=84,255,84
+Color=41,245,120
 
 
 [Color3]
 Bold=false
-Color=178,104,24
+Color=213,203,69
 
 
 [Color3Intense]
 Bold=false
-Color=255,255,84
+Color=248,228,51
 
 
 [Color4]
 Bold=false
-Color=24,24,178
+Color=30,124,226
 
 
 [Color4Intense]
 Bold=false
-Color=84,84,255
+Color=74,135,235
 
 
 [Color5]
 Bold=false
-Color=178,24,178
+Color=163,59,196
 
 
 [Color5Intense]
 Bold=false
-Color=255,84,255
+Color=234,34,243
 
 
 [Color6]
 Bold=false
-Color=24,178,178
+Color=66,170,180
 
 
 [Color6Intense]
 Bold=false
-Color=84,255,255
+Color=21,246,233
 
 
 [Color7]
 Bold=false
-Color=178,178,178
+Color=204,204,204
 
 
 [Color7Intense]
@@ -89,7 +90,7 @@ Color=255,255,255
 
 [Foreground]
 Bold=false
-Color=255,255,255
+Color=204,204,204
 
 
 [ForegroundIntense]
