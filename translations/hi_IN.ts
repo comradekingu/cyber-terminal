@@ -6,17 +6,17 @@
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="32"/>
         <source>Process is running, are you sure you want to quit?</source>
-        <translation type="unfinished">प्रक्रिया चल रही है, क्या आप वाकई छोड़ना चाहते हैं?</translation>
+        <translation>प्रोसेस चल रही है, क्या आप वाकई छोड़ना चाहते हैं?</translation>
     </message>
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="40"/>
         <source>OK</source>
-        <translation type="unfinished">ठीक है</translation>
+        <translation>ठीक है</translation>
     </message>
     <message>
         <location filename="../src/qml/ExitPromptDialog.qml" line="48"/>
         <source>Cancel</source>
-        <translation type="unfinished">रद्द करना</translation>
+        <translation>रद्द करो</translation>
     </message>
 </context>
 </TS>
